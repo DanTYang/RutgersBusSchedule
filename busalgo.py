@@ -51,6 +51,7 @@ storage = {'Classes':[], 'Locations':[]}
 for i in range(int(num_classes)):
     ClassName = input('What is the name of class '+ str(i + 1) +'?: ')
     ClassLoc = input('Which building is it Located in?: ').replace(' ','+')
+    ClassLoc = ClassLoc + '+Rutgers'
     storage['Classes'].append(ClassName)
     storage['Locations'].append(ClassLoc)
 time_difference = 0
