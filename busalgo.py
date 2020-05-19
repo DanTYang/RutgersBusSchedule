@@ -8,6 +8,7 @@ def timeFromNowDisplay(times):
     return local_time
 
 def secondConverter(seconds):
+    output = ''
     minutes = 0
     hours = 0
     days = 0
@@ -24,15 +25,16 @@ def secondConverter(seconds):
                 if days > 365:
                     years = days // 365
                     days = days - (years * 365)
-                    print(str(years) + ' years, ' + str(days) + ' days, ' + str(hours) + ' hours, ' + str(minutes) + ' minutes, ' + str(seconds) + ' seconds.')
+                    output = str(years) + ' years, ' + str(days) + ' days, ' + str(hours) + ' hours, ' + str(minutes) + ' minutes, ' + str(seconds) + ' seconds.'
                 else:
-                    print(str(days) + ' days, ' + str(hours) + ' hours, ' + str(minutes) + ' minutes, ' + str(seconds) + ' seconds.')
+                    output = str(days) + ' days, ' + str(hours) + ' hours, ' + str(minutes) + ' minutes, ' + str(seconds) + ' seconds.'
             else:
-                print(str(hours) + ' hours, ' + str(minutes) + ' minutes, ' + str(seconds) + ' seconds.')
-        else:
-            print(str(minutes) + ' minutes, ' + str(seconds) + ' seconds.')
+                output = str(hours) + ' hours, ' + str(minutes) + ' minutes, ' + str(seconds) + ' seconds.'
+        else: 
+            output = str(minutes) + ' minutes, ' + str(seconds) + ' seconds.'
     else:
-        print(str(seconds) + ' seconds.')
+        output = str(seconds) + ' seconds.'
+    return output
 
 def googleMapsTimeFind(origin, destination, mode):
     endpoint = 'https://maps.googleapis.com/maps/api/directions/json?'
@@ -56,5 +58,6 @@ print('curent time:' +timeFromNowDisplay(0))
 for i in range(int(num_classes) - 1):
     origin = storage['Locations'][i]
     destination = storage['Locations'][i+1]
-    print('Arival time to ' + storage['Classes'][i+1] + ': ' +timeFromNowDisplay(googleMapsTimeFind(origin, destination, 'walking') + time_difference))
+    print('Arival time to ' + storage['Classes'][i+1] + ': ' +timeFromNowDisplay(googleMapsTimeFind(origin, destination, 'walking') + time_difference) + 
+    ' (time taken: ' + secondConverter(googleMapsTimeFind(origin, destination, 'walking'))+')')
     time_difference = time_difference + googleMapsTimeFind(origin, destination, 'walking')
